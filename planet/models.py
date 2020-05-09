@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 
 """
@@ -24,7 +25,10 @@ from django.contrib.sites.models import Site
 from django.conf import settings
 from django.db.models.signals import pre_delete
 from django.template.defaultfilters import slugify
-from django.urls import reverse
+try:
+    from django.urls import reverse
+except ImportError:
+    from django.core.urlresolvers import reverse
 
 # Patch for handle new and old version of django-tagging
 try:

@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-from django.core.urlresolvers import reverse, reverse_lazy
+try:
+    from django.urls import reverse, reverse_lazy
+except ImportError:
+    from django.core.urlresolvers import reverse, reverse_lazy
+
 from django.forms import ValidationError
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404, redirect

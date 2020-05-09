@@ -3,7 +3,10 @@
 from django.conf import settings
 from django.contrib.sites.models import Site
 from django.contrib.syndication.views import Feed
-from django.core.urlresolvers import reverse
+try:
+    from django.urls import reverse
+except ImportError:
+    from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.template.defaultfilters import linebreaks, escape
 from django.utils.translation import ugettext_lazy as _
