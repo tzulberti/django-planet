@@ -76,7 +76,7 @@ class Blog(models.Model):
         return '{} ({})'.format(self.title, self.url)
 
     def get_absolute_url(self):
-        return ('planet.views.blog_detail', [str(self.id), self.get_slug()])
+        return reverse('planet_blog_detail', args=[str(self.id), self.get_slug()])
 
     def get_slug(self):
         return slugify(self.title) or "no-title"
@@ -230,7 +230,7 @@ class Feed(models.Model):
         return '{} ({})'.format(self.title, self.url)
 
     def get_absolute_url(self):
-        return reverse('planet.views.feed_detail', args=[str(self.id), self.get_slug()])
+        return reverse('planet_feed_detail', args=[str(self.id), self.get_slug()])
 
     def get_slug(self):
         return slugify(self.title) or "no-title"
@@ -289,7 +289,7 @@ class Post(models.Model):
         return "{} [{}]".format(self.title, self.feed.title)
 
     def get_absolute_url(self):
-        return reverse('planet.views.post_detail', args=[str(self.id), self.get_slug()])
+        return reverse('planet_post_detail', args=[str(self.id), self.get_slug()])
 
     def get_slug(self):
         return slugify(self.title) or "no-title"
@@ -325,7 +325,7 @@ class Author(models.Model):
         return "{} ({})".format(self.name, self.email)
 
     def get_absolute_url(self):
-        return reverse('planet.views.author_detail', args=[str(self.id), self.get_slug()])
+        return reverse('planet_author_detail', args=[str(self.id), self.get_slug()])
 
     def get_slug(self):
         return slugify(self.name) or "no-title"
