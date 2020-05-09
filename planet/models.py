@@ -24,6 +24,7 @@ from django.contrib.sites.models import Site
 from django.conf import settings
 from django.db.models.signals import pre_delete
 from django.template.defaultfilters import slugify
+from django.urls import reverse
 
 # Patch for handle new and old version of django-tagging
 try:
@@ -70,7 +71,6 @@ class Blog(models.Model):
     def __str__(self):
         return '{} ({})'.format(self.title, self.url)
 
-    @models.permalink
     def get_absolute_url(self):
         return ('planet.views.blog_detail', [str(self.id), self.get_slug()])
 
@@ -225,9 +225,8 @@ class Feed(models.Model):
     def __str__(self):
         return '{} ({})'.format(self.title, self.url)
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('planet.views.feed_detail', [str(self.id), self.get_slug()])
+        return reverse('planet.views.feed_detail', args=[str(self.id), self.get_slug()])
 
     def get_slug(self):
         return slugify(self.title) or "no-title"
@@ -285,9 +284,8 @@ class Post(models.Model):
     def __str__(self):
         return "{} [{}]".format(self.title, self.feed.title)
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('planet.views.post_detail', [str(self.id), self.get_slug()])
+        return reverse('planet.views.post_detail', args=[str(self.id), self.get_slug()])
 
     def get_slug(self):
         return slugify(self.title) or "no-title"
@@ -322,9 +320,8 @@ class Author(models.Model):
     def __str__(self):
         return "{} ({})".format(self.name, self.email)
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('planet.views.author_detail', [str(self.id), self.get_slug()])
+        return reverse('planet.views.author_detail', args=[str(self.id), self.get_slug()])
 
     def get_slug(self):
         return slugify(self.name) or "no-title"
