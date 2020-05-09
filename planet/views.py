@@ -6,7 +6,12 @@ except ImportError:
 
 from django.forms import ValidationError
 from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response, get_object_or_404, redirect
+try:
+    from django.shortcuts import render as render_to_response
+except ImportError:
+    from django.shortcuts import render_to_response
+
+from django.shortcuts import get_object_or_404, redirect
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView
