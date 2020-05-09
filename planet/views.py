@@ -7,7 +7,11 @@ except ImportError:
 from django.forms import ValidationError
 from django.http import HttpResponseRedirect
 try:
-    from django.shortcuts import render as render_to_response
+    from django.shortcuts import render
+
+    def render_to_response(*args, **kwargs):
+        request = kwargs.pop('context_instance')
+        return render(request, *args, **kwargs)
 except ImportError:
     from django.shortcuts import render_to_response
 

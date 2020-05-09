@@ -1,4 +1,5 @@
 import django
+import os
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -61,3 +62,21 @@ MIDDLEWARE_CLASSES = (
 STATIC_URL = '/static/'
 
 PLANET = {"USER_AGENT": "django-planet/0.1"}
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'django-planet', 'planet', 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]

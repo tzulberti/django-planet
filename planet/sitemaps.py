@@ -26,7 +26,7 @@ class BlogSitemap(Sitemap):
 
     def location(self, obj):
         slug = slugify(obj[1]) or "no-title"
-        return reverse("planet.views.blog_detail",
+        return reverse("planet_blog_detail",
             kwargs=dict(blog_id=obj[0], slug=slug))
 
 
@@ -43,7 +43,7 @@ class PostSitemap(Sitemap):
 
     def location(self, obj):
         slug = slugify(obj[1]) or "no-title"
-        return reverse("planet.views.post_detail",
+        return reverse("planet_post_detail",
             kwargs=dict(post_id=obj[0], slug=slug))
 
 
@@ -57,7 +57,7 @@ class AuthorSitemap(Sitemap):
 
     def location(self, obj):
         slug = slugify(obj[1]) or "no-title"
-        return reverse("planet.views.author_detail",
+        return reverse("planet_author_detail",
             kwargs=dict(author_id=obj[0], slug=slug))
 
 
@@ -74,7 +74,7 @@ class FeedSitemap(Sitemap):
 
     def location(self, obj):
         slug = slugify(obj[1]) or "no-title"
-        return reverse("planet.views.feed_detail",
+        return reverse("planet_feed_detail",
             kwargs=dict(feed_id=obj[0], slug=slug))
 
 
@@ -90,7 +90,7 @@ class TagSitemap(Sitemap):
         return datetime.now()
 
     def location(self, obj):
-        return reverse("planet.views.tag_detail",
+        return reverse("planet_tag_detail",
             kwargs=dict(tag=obj))
 
 
