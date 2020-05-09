@@ -17,7 +17,8 @@ setup(
         "django-tagging==0.3.6",
         "django-pagination-py3",
         "Django>=1.6",
-        "beautifulsoup4"
+        "beautifulsoup4",
+        "six"
     ],
 
     packages=find_packages(),
