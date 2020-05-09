@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 try:
-    # Django 1.6
-    from django.conf.urls import patterns, url
+    from django.urls import re_path as url
+    patterns = list
 except ImportError:
-    # Django < 1.6
-    from django.conf.urls.defaults import patterns, url
+    try:
+        # Django 1.6
+        from django.conf.urls import patterns, url
+    except ImportError:
+        # Django < 1.6
+        from django.conf.urls.defaults import patterns, url
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.sitemaps import views as sitemaps_views
@@ -22,7 +26,8 @@ else:
     url_add_feed_tuple = url(r'^feeds/add/$', FeedAddView.as_view(), name="planet_feed_add")
 
 
-urlpatterns = patterns('planet.views',
+urlpatterns = patterns(
+    'planet.views',
     url(r'^blogs/(?P<pk>\d+)/delete/$', login_required(BlogDeleteView.as_view()), name="planet_blog_delete"),
     url(r'^blogs/(?P<blog_id>\d+)/(?P<slug>[a-zA-Z0-9_\-]+)/$', "blog_detail", name="planet_blog_detail"),
     url(r'^blogs/(?P<blog_id>\d+)/$', "blog_detail"),
@@ -57,7 +62,8 @@ urlpatterns = patterns('planet.views',
 )
 
 # Feed's urls
-urlpatterns += patterns('',
+urlpatterns += patterns(
+    '',
     url(r'^posts/feeds/rss/$', PostFeed(), name="planet_rss_feed"),
     url(r'^feeds/rss/tags/(?P<tag>.*)/$', TagFeed(), name="planet_tag_rss_feed"),
     url(r'^feeds/rss/authors/(?P<author_id>\d+)/$', AuthorFeed(), name="planet_author_rss_feed"),
@@ -65,7 +71,8 @@ urlpatterns += patterns('',
 )
 
 # sitemaps
-urlpatterns += patterns('',
+urlpatterns += patterns(
+    '',
     url(r'^sitemap.xml$',
         cache_page(86400)(sitemaps_views.index),
         {'sitemaps': planet_sitemaps_dict, 'sitemap_url_name': 'sitemaps'}),
